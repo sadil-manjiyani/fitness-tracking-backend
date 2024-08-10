@@ -1,10 +1,10 @@
 export const knexConnection = {
     client: 'mysql',
     connection: {
-      host: '127.0.0.1',
+      host: 'fitness-tracking.c9064eqqotc4.ap-south-1.rds.amazonaws.com',
       port: 3306,
-      user: 'root',
-      password: '',
-      database: 'fitness_tracker',
+      user: 'admin',
+      password: 'cvTg5BSoCjGPtleXSN9M',
+      database: 'fitness_tracking',
     },
   };

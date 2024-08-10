@@ -1,8 +1,5 @@
+import { knexConnection } from './config/index.js';
 
-const { knexConnection } = require("./config");
-
-module.exports = {
-  development: knexConnection,
-  staging: knexConnection,
-  production: knexConnection
-};
+export const development = knexConnection;
+export const staging = knexConnection;
+export const production = knexConnection;
