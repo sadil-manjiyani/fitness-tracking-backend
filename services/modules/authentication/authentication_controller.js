@@ -30,7 +30,7 @@ export const login = async (req,res,next) => {
       const user = await req.app.knexConnection('u_user').where({ user_email }).first();
   
       if (!user) {
-        return sendResponse(res, 404, null, 'User not found');
+        return sendResponse(res, null, 'User not found',404);
       }
   
       // Check if the password is correct
