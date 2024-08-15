@@ -9,6 +9,7 @@ const port = process.env.PORT || 8001;
 const knex = knexModule(knexConnection);
 
 app.use(cors());
+app.use(express.json());
 app.knexConnection = knex;
 global.knexConnection = knex;
 

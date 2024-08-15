@@ -18,6 +18,8 @@ export const signUp = (req,res,next)=>{
 }
 
 export const login = async (req,res,next) => {
+
+  console.log("Req.body>>", req.body);
    
     const { user_email, user_password } = req.body;
     
