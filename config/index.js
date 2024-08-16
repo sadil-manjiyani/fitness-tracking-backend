@@ -8,3 +8,5 @@ export const knexConnection = {
       database: 'fitness_tracking',
     },
   };
+
+  export const jwtTokenSecret="ThisIsMyJwtTokenSecret";

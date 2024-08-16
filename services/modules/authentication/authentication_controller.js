@@ -2,8 +2,9 @@ import { sendResponse } from '../../../helpers/response_helper.js';
 import * as authentication_helper from './authentication_helper.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import { jwtTokenSecret } from '../../../config/index.js';
 
-export const signUp = (req,res,next)=>{
+export const signUp = async (req,res,next)=>{
     const {
         email,
         password,
@@ -12,7 +13,7 @@ export const signUp = (req,res,next)=>{
         weight
     }= req.body;
 
-    const hashedPassword = authentication_helper.hashPassword(password);
+    const hashedPassword = await authentication_helper.hashPassword(password);
     console.log("Hashed Password>>>>",hashedPassword);
 
 }
@@ -45,7 +46,7 @@ export const login = async (req,res,next) => {
       // Generate a JWT token
       const token = jwt.sign(
         { user_id: user.user_id, user_email: user.user_email },
-        process.env.JWT_SECRET,
+        jwtTokenSecret,
         { expiresIn: '90d' } 
       );
   

@@ -6,7 +6,7 @@ export function sendResponse(res, data = null, message = '', statusCode = 200) {
     }
   
     const response = {
-      success: statusCode >= 200 && statusCode < 300,
+      status: statusCode >= 200 && statusCode < 300,
       message: message,
       data: data
     };
