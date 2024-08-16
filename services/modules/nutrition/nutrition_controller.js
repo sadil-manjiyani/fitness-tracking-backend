@@ -51,3 +51,17 @@ try{
     return sendResponse(res,[],"error in tracking nutrients",502);
 }
 }
+
+
+export const trackWater = async () => {
+    try {
+        const {}= req.body;
+
+        const dataToInsert ={};
+        let water_intake_id = await req.app.knexConnection('m_water_intake').insert(dataToInsert); 
+        return sendResponse(res,water_intake_id,"success",200);
+    } catch (error) {
+        console.log("Error in tracking water", error);
+        return sendResponse(res,[],'Error in Tracking Water',error);
+    }
+}
