@@ -27,7 +27,7 @@ export const getUserDetails = async (req,res,next)=>{
     }
 }
 
-export const getBMI = async ()=> {
+export const getBMI = async (req,res,next)=> {
     
     try{user_id = req.params.user_id;
     let [user_details] = await req.app.knexConnection('u_user').where({"user_id": user_id});
