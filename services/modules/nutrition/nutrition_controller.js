@@ -82,7 +82,8 @@ export const getUserSessionDetails = async (req,res,next)=> {
 try{
 
     let response = await req.app.knexConnection('m_nutrition').
-    leftJoin('m_sessions','m_nutrition.session_id','m_sessions.session_id')
+    leftJoin('m_sessions','m_nutrition.session_id','m_sessions.session_id').
+    leftJoin('m_food_items','m_food_items.food_id','m_nutrition.food_id')
     // .groupBy('m_sessions.session_name');
 
     console.log("Response.",response);
