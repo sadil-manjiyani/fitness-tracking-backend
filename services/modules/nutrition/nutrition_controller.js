@@ -8,7 +8,7 @@ export const getAllFoodItems = async (req,res,next)=> {
 
         let food_data_query; 
         
-        if(searchText){
+        if(searchText && searchText !=""){
             food_data_query = await req.app.knexConnection('m_food_items').where("food_name","like",`%${searchText}%`);
         }else{
             food_data_query= await req.app.knexConnection('m_food_items').limit(10);
