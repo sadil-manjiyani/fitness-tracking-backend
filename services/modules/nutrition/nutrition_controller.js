@@ -70,6 +70,43 @@ try{
 }
 }
 
+export const getUserSessionDetails = async (req,res,next)=> {
+    const {
+        date,
+        user_id,
+        session_id
+    } = req.body;
+
+    console.log("Reqbidy", req.body);
+
+try{
+
+    let response = await req.app.knexConnection('m_nutrition').
+    leftJoin('m_sessions','m_nutrition.session_id','m_sessions.session_id')
+    // .groupBy('m_sessions.session_name');
+
+    console.log("Response.",response);
+    const groupedData = response.reduce((result, item) => {
+        // If the session_name does not exist in the result object, create it
+        if (!result[item.session_id]) {
+          result[item.session_id] = [];
+        }
+        
+        // Add the current item to the relevant session_name array
+        result[item.session_id].push(item);
+        
+        return result;
+      }, {});
+    
+
+    return sendResponse(res,groupedData,"successfully got the data",200);
+
+}catch(error){
+    console.log("Error While Inserting nutrients",error);
+    return sendResponse(res,[],"error in tracking nutrients",502);
+}
+}
+
 
 export const trackWater = async () => {
     try {
