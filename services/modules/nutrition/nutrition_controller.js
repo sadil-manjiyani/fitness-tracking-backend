@@ -3,7 +3,19 @@ import { sendResponse } from "../../../helpers/response_helper.js"
 export const getAllFoodItems = async (req,res,next)=> {
 
     try {
-        let food_data = await req.app.knexConnection('m_food_items').limit(10);
+        let searchText = req.query.searchText;
+        console.log("Seatch Text", searchText);
+
+        let food_data_query; 
+        
+        if(searchText){
+            food_data_query = await req.app.knexConnection('m_food_items').where("food_name","like",`%${searchText}%`);
+        }else{
+            food_data_query= await req.app.knexConnection('m_food_items').limit(10);
+        }
+
+        let food_data = await food_data_query;
+        
         return sendResponse(res,food_data,"success",200);
     } catch (error) {
         console.log("Error While Inserting nutrients",error);
