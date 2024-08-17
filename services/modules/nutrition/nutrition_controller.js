@@ -32,9 +32,13 @@ export const trackFood = async (req,res,next)=> {
         session_id
     } = req.body;
 
+    console.log("Reqbidy", req.body);
+
 try{
+    console.log(req.app.knexConnection('m_food_items')
+    .where({food_id}).orderBy('created_at','DESC').limit(1).toString())
     let [food_data] = await req.app.knexConnection('m_food_items')
-    .where(food_id).orderBy('created_at','DESC').limit(1);
+    .where({food_id}).orderBy('created_at','DESC').limit(1);
     //assuming quantity in gms
     let calories = (food_data.calories * serving_size)/100;
     let fats = (food_data.fats * serving_size)/100;
@@ -54,6 +58,8 @@ try{
         sugar_g:sugar,
         session_id
     };
+
+    console.log("Data to Insert", insertData);
 
     let insert_id = await req.app.knexConnection('m_nutrition').insert(insertData);
     return sendResponse(res,insert_id,"successfully tracked",200);
